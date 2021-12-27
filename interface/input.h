@@ -1,5 +1,5 @@
-#ifndef LAB4_INPUT_H
-#define LAB4_INPUT_H
+#ifndef LAB5_INPUT_H
+#define LAB5_INPUT_H
 
 #include "stdio.h"
 #include "readline/readline.h"
@@ -18,4 +18,4 @@ int** fileInput(FILE*, int**, int*, int*);
 int validInput(int, int);
 FILE* validFile(FILE*);
 
-#endif //LAB4_INPUT_H
+#endif //LAB5_INPUT_H

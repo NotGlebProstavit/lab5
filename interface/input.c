@@ -46,6 +46,7 @@ int** consoleInput(int** matrix, int* columns, int* rows){
 }
 
 int* consoleInputOne(int* massive, const int* len){
+    printf("Enter %d elements of massive\n", *len);
     for(int j = 0; j < *len; j++){
         scanf("%d", &(massive[j]));
     }

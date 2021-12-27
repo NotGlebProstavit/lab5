@@ -41,8 +41,8 @@ int** deleteColumn(int** matrix, int* columns, int rows, int index){
         for(int j = index; j < *columns - 1; j++){
             matrix[i][j] = matrix[i][j+1];
         }
-        *columns -= 1;
     }
+    *columns -= 1;
     for(int i = 0; i < rows; i++){
         matrix[i] = (int*) realloc(matrix[i], (*columns) * sizeof(int));
     }
@@ -55,8 +55,8 @@ int** deleteRow(int** matrix, int columns, int* rows, int index){
         for (int i = index; i < *rows - 1; i++) {
             matrix[i][j] = matrix[i + 1][j];
         }
-        *rows -= 1;
     }
+    *rows -= 1;
     free(matrix[oldRows]);
     matrix = (int**) realloc(matrix, (*rows)* sizeof(int*));
     return matrix;
@@ -104,7 +104,7 @@ int** update(int** matrix, int* columns, int* rows){
     int n = validInput(1, 6);
     switch (n) {
         case 1:{
-            printf("Where do you want insert column");
+            printf("Where do you want insert column?\n");
             int index = validInput(0, *columns);
             int* massive = (int*) malloc(*rows * sizeof(int));
             massive = consoleInputOne(massive, rows);
@@ -112,21 +112,21 @@ int** update(int** matrix, int* columns, int* rows){
             break;
         }
         case 2:{
-            printf("Where do you want insert row");
-            int index = validInput(0, *columns);
+            printf("Where do you want insert row?\n");
+            int index = validInput(0, *rows);
             int* massive = (int*) malloc(*columns * sizeof(int));
             massive = consoleInputOne(massive, columns);
             matrix = insertRow(matrix, *columns, rows, index, massive);
             break;
         }
         case 3:{
-            printf("Where do you want delete column");
+            printf("Where do you want delete column?\n");
             int index = validInput(0, *columns);
             matrix = deleteColumn(matrix, columns, *rows, index);
             break;
         }
         case 4:{
-            printf("Where do you want delete row");
+            printf("Where do you want delete row?\n");
             int index = validInput(0, *rows);
             matrix = deleteRow(matrix, *columns, rows, index);
             break;

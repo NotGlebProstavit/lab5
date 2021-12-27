@@ -1,5 +1,5 @@
-#ifndef LAB4_MENU_H
-#define LAB4_MENU_H
+#ifndef LAB5_MENU_H
+#define LAB5_MENU_H
 
 #include "stdio.h"
 
