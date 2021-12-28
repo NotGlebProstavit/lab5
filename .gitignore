@@ -3,3 +3,5 @@ CMakeLists.txt
 Makefile
 interface/readline
 .idea/
+*.o
+lab5
