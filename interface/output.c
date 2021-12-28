@@ -10,7 +10,11 @@ void consoleOutput(int** matrix, int columns, int rows){
 }
 
 void fileOutput(FILE* fm, int** matrix, int columns, int rows){
-
+	fwrite(&columns, sizeof(int), 1, fm);
+	fwrite(&rows, sizeof(int), 1, fm);
+	for(int i = 0; i < rows; i++){
+		fwrite(matrix[i], sizeof(int), columns, fm);
+	}
 }
 
 void output(int** matrix, int columns, int rows){

@@ -10,6 +10,17 @@ int** freeAll(int** matrix, int* columns, int* rows){
     return NULL;
 }
 
+int** copyMatrix(int** dist, int** src, int columns, int rows){
+	dist = (int**) malloc(rows * sizeof(int*));
+	for(int i = 0; i < rows; i++){
+		dist[i] = (int*) malloc(columns * sizeof(int));
+		for(int j = 0; j < columns; j++){
+			dist[i][j] = src[i][j];
+		}
+	}
+	return dist;
+}
+
 int** insertColumn(int** matrix, int* columns, int rows, int index, const int* massive){
     for(int i = 0; i < rows; i++){
         matrix[i] = (int*) realloc(matrix[i], (*columns + 1) * sizeof(int));
@@ -24,6 +35,7 @@ int** insertColumn(int** matrix, int* columns, int rows, int index, const int* m
 
 int** insertRow(int** matrix, int columns, int* rows, int index, const int* massive){
     matrix = (int**) realloc(matrix, (*rows + 1)* sizeof(int*));
+    matrix[*rows] = (int*) malloc(columns * sizeof(int));
     for(int i = *rows; i > index; i--){
         for(int j = 0; j < columns; j++){
             matrix[i][j] = matrix[i-1][j];
@@ -50,14 +62,13 @@ int** deleteColumn(int** matrix, int* columns, int rows, int index){
 }
 
 int** deleteRow(int** matrix, int columns, int* rows, int index){
-    int oldRows = *rows;
-    for(int j = 0; j < columns; j++) {
-        for (int i = index; i < *rows - 1; i++) {
-            matrix[i][j] = matrix[i + 1][j];
-        }
-    }
+   	for(int i = index; i < *rows - 1; i++){
+   		for(int j = 0; j < columns; j++){
+   			matrix[i][j] = matrix[i+1][j];
+   		}
+   	}
+    free(matrix[*rows - 1]);
     *rows -= 1;
-    free(matrix[oldRows]);
     matrix = (int**) realloc(matrix, (*rows)* sizeof(int*));
     return matrix;
 }
@@ -109,6 +120,7 @@ int** update(int** matrix, int* columns, int* rows){
             int* massive = (int*) malloc(*rows * sizeof(int));
             massive = consoleInputOne(massive, rows);
             matrix = insertColumn(matrix, columns, *rows, index, massive);
+            free(massive);
             break;
         }
         case 2:{
@@ -117,6 +129,7 @@ int** update(int** matrix, int* columns, int* rows){
             int* massive = (int*) malloc(*columns * sizeof(int));
             massive = consoleInputOne(massive, columns);
             matrix = insertRow(matrix, *columns, rows, index, massive);
+            free(massive);
             break;
         }
         case 3:{

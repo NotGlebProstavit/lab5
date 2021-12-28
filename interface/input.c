@@ -1,7 +1,7 @@
 #include "input.h"
 
 int** input(int** matrix, int* columns, int* rows){
-    if(*rows == 0){
+    if(*rows != 0){
         matrix = freeAll(matrix, columns, rows);
     }
     printInputMenu();
@@ -78,6 +78,12 @@ FILE* validFile(FILE* fm){
 }
 
 int** fileInput(FILE* fm, int** matrix, int* columns, int* rows){
-
+	fread(columns, sizeof(int), 1, fm);
+	fread(rows, sizeof(int), 1, fm);
+	matrix = (int**) malloc(*rows * sizeof(int*));
+	for(int i = 0; i < *rows; i++){
+		matrix[i] = (int*) malloc(*columns * sizeof(int));
+		fread(matrix[i], sizeof(int), *columns, fm);
+	}
     return matrix;
 }

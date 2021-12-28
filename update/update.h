@@ -4,6 +4,7 @@
 #include "../interface/input.h"
 
 int** freeAll(int**, int*, int*);
+int** copyMatrix(int**, int**, int, int);
 
 int** insertColumn(int**, int*, int, int, const int*);
 int** insertRow(int**, int, int*, int, const int*);
